@@ -25,7 +25,7 @@
 <div class="header">
   <h1>Legacy</h1>
   <p style="font-size:22px;margin:10px;">Build yours. Build ours.</p>
-  <p style="font-size:18px;color:#79c879;">Humanity Level 0.71 ↑</p>
+  <p style="font-size:18px;color:#79c879;">Humanity Level 0.71</p>
 </div>
 
 <svg class="tree" viewBox="0 0 300 400">
@@ -33,7 +33,7 @@
   <path d="M150 250 Q100 310 70 340 Q150 310 150 340 Q230 310 230 340" stroke="#94a3b8" stroke-width="16" fill="none"/>
   <rect x="140" y="180" width="20" height="70" fill="#475569" rx="10"/>
   <ellipse cx="100" cy="150" rx="45" ry="18" transform="rotate(-35 100 150)" fill="#93c5fd"/>
-  <ellipse cx="200" cy="155" rx="45" ry="18" transform="rotate(35 200 155)" fill="#93c5fd"/>
+  <ellipse cx="200" cy="155" rx="45 ry="18" transform="rotate(35 200 155)" fill="#93c5fd"/>
   <text x="150" y="380" text-anchor="middle" fill="#8b949e" font-size="14">Roots → You → Descendants</text>
 </svg>
 
@@ -41,29 +41,4 @@
   <h2 style="color:#58a6ff;">Your Family Tree Projector</h2>
   Your age: <input type="number" id="age" value="35"><br>
   Kids you have now: <input type="number" id="kids" value="2"><br>
-  Average kids per generation: <input type="number" id="avg" value="2.3" step="0.1"><br>
-  <button onclick="project()">Calculate 200-Year Legacy</button>
-  <div id="projection">Ready…</div>
-</div>
-
-<div class="grid">
-  <div class="card"><h3>Physical Vitality</h3><div class="xp" id="a">0</div><button onclick="add('a',60)">+Workout</button></div>
-  <div class="card"><h3>Family Legacy</h3><div class="xp" id="b">0</div><button onclick="add('b',80)">+Family Time</button></div>
-  <div class="card"><h3>Soil & Forest</h3><div class="xp" id="c">0</div><button onclick="add('c',120)">+Plant Trees</button></div>
-  <div class="card"><h3>Wealth & Land</h3><div class="xp" id="d">0</div><button onclick="add('d',70)">+Build</button></div>
-</div>
-
-<script>
-function add(id,pts){let e=document.getElementById(id);let v=parseInt(e.textContent)||0;e.textContent=v+pts+Math.floor(Math.random()*20);}
-function project(){
-  let age=+document.getElementById('age').value;
-  let kids=+document.getElementById('kids').value;
-  let avg=+document.getElementById('avg').value;
-  let gens=Math.floor((100-age)/25)+3;
-  let total=kids*Math.pow(avg,gens);
-  document.getElementById('projection').innerHTML=`<strong style="color:#ffd700">\( {Math.round(total).toLocaleString()}</strong> descendants in year \){new Date().getFullYear()+200}`;
-}
-project();
-</script>
-</body>
-</html>
+  Average kids per generation: <input type="number" id="avg" value="2.3" step="0
