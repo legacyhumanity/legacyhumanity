@@ -10,4 +10,69 @@
   *{margin:0;padding:0;box-sizing:border-box;}
   body{font-family:'Inter',sans-serif;background:var(--bg);color:#e2e8f0;line-height:1.6;overflow-x:hidden;}
   .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 20px;background:radial-gradient(circle at center,#1e293b,#0f172a);}
-  h1{font-size:clamp(3rem,8vw,6rem);font-weight:
+  h1{font-size:clamp(3rem,8vw,6rem);font-weight:700;background:linear-gradient(90deg,#38bdf8,#60a5fa,#93c5fd);-webkit-background-clip:text;color:transparent;margin-bottom:1rem;}
+  .tagline{font-size:1.5rem;color:#94a3b8;margin:1rem 0 2rem;}
+  .tree{width:280px;height:280px;margin:2rem 0;}
+  .btn{background:var(--accent);color:#0f172a;padding:1rem 2.5rem;border-radius:50px;font-weight:700;font-size:1.2rem;border:none;cursor:pointer;box-shadow:0 10px 30px rgba(56,189,248,0.4);transition:0.3s;}
+  .btn:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(56,189,248,0.5);}
+  .calc{max-width:420px;margin:3rem auto;padding:2rem;background:var(--card);border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,0.3);}
+  input{width:100%;padding:14px;margin:10px 0;border-radius:12px;border:none;background:#334155;color:white;font-size:1.1rem;}
+  #result{font-size:2rem;color:var(--gold);margin-top:1rem;font-weight:700;}
+  .grid{max-width:1200px;margin:4rem auto;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;}
+  .card{background:var(--card);padding:2rem;border-radius:20px;text-align:center;box-shadow:0 15px 35px rgba(0,0,0,0.3);transition:0.3s;}
+  .card:hover{transform:translateY(-10px);}
+  .card h3{color:var(--accent);font-size:1.5rem;margin-bottom:0.5rem;}
+  .xp{font-size:2.5rem;color:var(--gold);font-weight:700;}
+  .card button{background:#10b981;color:white;padding:12px 24px;border:none;border-radius:50px;margin-top:1rem;cursor:pointer;}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>Legacy</h1>
+  <p class="tagline">Build yours. Build ours.</p>
+  <svg class="tree" viewBox="0 0 300 400">
+    <circle cx="150" cy="150" r="140" fill="#1e293b" opacity="0.9"/>
+    <path d="M150 250 Q90 320 60 360 Q150 320 150 360 Q240 320 240 360" stroke="#64748b" stroke-width="20" fill="none"/>
+    <rect x="135" y="180" width="30" height="80" fill="#475569" rx="15"/>
+    <ellipse cx="80" cy="140" rx="60" ry="25" fill="#38bdf8" opacity="0.8"/>
+    <ellipse cx="220" cy="150" rx="60" ry="25" fill="#38bdf8" opacity="0.8"/>
+    <ellipse cx="150" cy="100" rx="70" ry="30" fill="#38bdf8" opacity="0.9"/>
+    <text x="150" y="380" text-anchor="middle" fill="#64748b" font-size="16">Roots → You → Descendants</text>
+  </svg>
+  <button class="btn" onclick="document.querySelector('.calc').scrollIntoView({behavior:'smooth'})">Start Your Legacy</button>
+</div>
+
+<div class="calc">
+  <h2 style="color:var(--accent);text-align:center;margin-bottom:1rem;">Your Family Tree Projector</h2>
+  <input type="number" id="age" value="35" placeholder="Your age">
+  <input type="number" id="kids" value="2" placeholder="Kids you have now">
+  <input type="number" id="avg" value="2.3" step="0.1" placeholder="Average kids per generation">
+  <button onclick="project()" class="btn">Calculate 200-Year Legacy</button>
+  <div id="result">Ready…</div>
+</div>
+
+<div class="grid">
+  <div class="card"><h3>Physical Vitality</h3><div class="xp" id="phys">0</div><button onclick="add('phys',60)">+Workout</button></div>
+  <div class="card"><h3>Family Legacy</h3><div class="xp" id="fam">0</div><button onclick="add('fam',80)">+Family Time</button></div>
+  <div class="card"><h3>Soil & Forest</h3><div class="xp" id="env">0</div><button onclick="add('env',120)">+Plant Trees</button></div>
+  <div class="card"><h3>Wealth & Land</h3><div class="xp" id="wealth">0</div><button onclick="add('wealth',70)">+Build</button></div>
+</div>
+
+<script>
+function add(id,pts){
+  let e=document.getElementById(id);
+  let v=parseInt(e.textContent)||0;
+  e.textContent=v+pts+Math.floor(Math.random()*30);
+}
+function project(){
+  let age=parseInt(document.getElementById('age').value)||35;
+  let kids=parseInt(document.getElementById('kids').value)||0;
+  let avg=parseFloat(document.getElementById('avg').value)||2.1;
+  let generations=Math.max(4,Math.floor((100-age)/25)+4);
+  let total=Math.round(kids*Math.pow(avg,generations));
+  document.getElementById('result').innerHTML=`<strong>\( {total.toLocaleString()}</strong> descendants in \){new Date().getFullYear()+200}`;
+}
+project();
+</script>
+</body>
+</html>
