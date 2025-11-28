@@ -24,7 +24,7 @@
 <body>
 <div class="header">
   <h1>Legacy</h1>
-  <p style="font-size:22px;">Build yours. Build ours.</p>
+  <p style="font-size:22px;margin:10px;">Build yours. Build ours.</p>
   <p style="font-size:18px;color:#79c879;">Humanity Level 0.71</p>
 </div>
 
@@ -39,4 +39,35 @@
 
 <div class="calc">
   <h2 style="color:#58a6ff;">Your Family Tree Projector</h2>
-  Your age: <input type="number" id="age"
+  Your age: <input type="number" id="age" value="35"><br>
+  Kids you have now: <input type="number" id="kids" value="2"><br>
+  Average kids per generation: <input type="number" id="avg" value="2.3" step="0.1"><br>
+  <button onclick="project()">Calculate 200-Year Legacy</button>
+  <div id="projection">Ready…</div>
+</div>
+
+<div class="grid">
+  <div class="card"><h3>Physical Vitality</h3><div class="xp" id="phys">0</div><button onclick="add('phys',60)">+Workout</button></div>
+  <div class="card"><h3>Family Legacy</h3><div class="xp" id="fam">0</div><button onclick="add('fam',80)">+Family Time</button></div>
+  <div class="card"><h3>Soil & Forest</h3><div class="xp" id="env">0</div><button onclick="add('env',120)">+Plant Trees</button></div>
+  <div class="card"><h3>Wealth & Land</h3><div class="xp" id="wealth">0</div><button onclick="add('wealth',70)">+Build</button></div>
+</div>
+
+<script>
+function add(id,pts){
+  let e = document.getElementById(id);
+  let v = parseInt(e.textContent) || 0;
+  e.textContent = v + pts + Math.floor(Math.random()*30);
+}
+function project(){
+  let age = parseInt(document.getElementById('age').value) || 35;
+  let kids = parseInt(document.getElementById('kids').value) || 0;
+  let avg = parseFloat(document.getElementById('avg').value) || 2.1;
+  let generations = Math.max(3, Math.floor((100 - age)/25) + 4);
+  let total = Math.round(kids * Math.pow(avg, generations));
+  document.getElementById('projection').innerHTML = `<strong style="color:#ffd700">\( {total.toLocaleString()}</strong> descendants in \){new Date().getFullYear()+200}`;
+}
+project();
+</script>
+</body>
+</html>
